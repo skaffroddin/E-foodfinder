@@ -3,43 +3,7 @@
 Database Schema
 The schema will have two main tables:
 
-Restaurants – stores details about each restaurant, including location data (latitude and longitude).
-Menu Items – stores details about each menu item available at each restaurant.
-Table Structures and Relationships
-Here’s how the tables might look:
 
-1. Restaurants Table
-Column	Type	Description
-id	BIGINT (PK)	Unique identifier for the restaurant
-name	VARCHAR(255)	Name of the restaurant
-address	VARCHAR(255)	Full address of the restaurant
-latitude	DECIMAL(10, 8)	Latitude of the restaurant
-longitude	DECIMAL(11, 8)	Longitude of the restaurant
-rating	FLOAT	Average rating (optional, for user feedback)
-created_at	TIMESTAMP	Timestamp when the entry was created
-updated_at	TIMESTAMP	Timestamp when the entry was last updated
-Primary Key: id
-Indexes: Index on latitude and longitude for geolocation queries.
-
-
-
-2. Menu Items Table
-Column	Type	Description
-id	BIGINT (PK)	Unique identifier for the menu item
-restaurant_id	BIGINT (FK)	Foreign key referencing id in the restaurants table
-name	VARCHAR(255)	Name of the menu item (e.g., "Chilli Chicken")
-price	DECIMAL(8, 2)	Price of the menu item
-description	TEXT	Description of the item
-category	VARCHAR(50)	Category (e.g., "Appetizer", "Main Course")
-created_at	TIMESTAMP	Timestamp when the entry was created
-updated_at	TIMESTAMP	Timestamp when the entry was last updated
-Primary Key: id
-Foreign Key: restaurant_id references id in restaurants
-Indexes: restaurant_id for optimized lookup of menu items by restaurant.
-
-
-
-Table Structures and Relationships
 1. Restaurants Table
 Column	Type	Description
 id	BIGINT (PK)	Unique identifier for the restaurant
@@ -68,7 +32,6 @@ Foreign Key: restaurant_id references id in Restaurants
 Indexes: Index on restaurant_id for optimized lookup of menu items by restaurant.
 
 ER Diagram
-Below is an ASCII ER diagram showing the relationships between the Restaurants and Menu Items tables.
 
 
 +----------------+       1       +----------------+
@@ -83,3 +46,80 @@ Below is an ASCII ER diagram showing the relationships between the Restaurants a
 | created_at     |               | created_at     |
 | updated_at     |               | updated_at     |
 +----------------+               +----------------+
+
+
+
+
+# eFoodFinder Database Schema
+
+The **eFoodFinder** database schema is designed to store information about restaurants, their locations, and their menu items. The database contains two main tables: **Restaurants** and **Menu Items**.
+
+---
+
+## Database Schema
+
+The schema includes two tables:
+
+- **Restaurants**: Stores details about each restaurant, including name, address, and geolocation data (latitude and longitude).
+- **Menu Items**: Stores information about each menu item available at each restaurant.
+
+---
+
+## Table Structures and Relationships
+
+### Restaurants Table
+
+| Column       | Type             | Description                                      |
+|--------------|------------------|--------------------------------------------------|
+| `id`         | `BIGINT` (PK)    | Unique identifier for the restaurant             |
+| `name`       | `VARCHAR(255)`   | Name of the restaurant                           |
+| `address`    | `VARCHAR(255)`   | Full address of the restaurant                   |
+| `latitude`   | `DECIMAL(10, 8)` | Latitude of the restaurant                       |
+| `longitude`  | `DECIMAL(11, 8)` | Longitude of the restaurant                      |
+| `rating`     | `FLOAT`          | Average rating (optional, for user feedback)     |
+| `created_at` | `TIMESTAMP`      | Timestamp when the entry was created             |
+| `updated_at` | `TIMESTAMP`      | Timestamp when the entry was last updated        |
+
+**Primary Key**: `id`  
+**Indexes**: Index on `latitude` and `longitude` for optimized geolocation queries.
+
+---
+
+### Menu Items Table
+
+| Column          | Type              | Description                                      |
+|-----------------|-------------------|--------------------------------------------------|
+| `id`            | `BIGINT` (PK)     | Unique identifier for the menu item              |
+| `restaurant_id` | `BIGINT` (FK)     | Foreign key referencing `id` in **Restaurants**  |
+| `name`          | `VARCHAR(255)`    | Name of the menu item (e.g., "Chilli Chicken")   |
+| `price`         | `DECIMAL(8, 2)`   | Price of the menu item                           |
+| `description`   | `TEXT`            | Description of the menu item                     |
+| `category`      | `VARCHAR(50)`     | Category of the item (e.g., "Appetizer")         |
+| `created_at`    | `TIMESTAMP`       | Timestamp when the entry was created             |
+| `updated_at`    | `TIMESTAMP`       | Timestamp when the entry was last updated        |
+
+**Primary Key**: `id`  
+**Foreign Key**: `restaurant_id` references `id` in **Restaurants**  
+**Indexes**: Index on `restaurant_id` for optimized lookup of menu items by restaurant.
+
+---
+
+## ER Diagram
+
+The following ASCII ER diagram shows the relationship between the **Restaurants** and **Menu Items** tables:
+
+
++----------------+        1        +----------------+
+|   RESTAURANTS  |---------------->|   MENU ITEMS   |
++----------------+                 +----------------+
+| id (PK)        |                 | id (PK)        |
+| name           |                 | restaurant_id  |
+| address        |                 | name           |
+| latitude       |                 | price          |
+| longitude      |                 | description    |
+| rating         |                 | category       |
+| created_at     |                 | created_at     |
+| updated_at     |                 | updated_at     |
++----------------+                 +----------------+
+```
+
