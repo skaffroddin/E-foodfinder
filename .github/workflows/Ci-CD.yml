@@ -35,8 +35,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs/         # Add trailing slash here
-          local-dir: ./               # Directory to upload
+          server-dir: /htdocs/         
+          local-dir: ./               
 
       # - name: Run migrations via webhook
       #   env:
