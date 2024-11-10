@@ -16,7 +16,7 @@ E-foodfinder is a Laravel-based web application that helps users find restaurant
 
 ## Tech Stack
 
-- **Backend**: Laravel 9.x
+- **Backend**: Laravel 11.x
 - **Frontend**: HTML, CSS, JavaScript (Tailwind CSS)
 - **Database**: MySQL
 - **AJAX**: Vanilla JavaScript (no need for external libraries like Axios)
