@@ -3,64 +3,44 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - main  # This triggers the workflow when code is pushed to the 'main' branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout Repository
+      - name: Check out repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
-      # Step 2: Install Node.js dependencies and build assets (only if applicable)
       - name: Install Node.js dependencies and build assets
         run: |
           npm install
-          npm run production  # or npm run build if you have a custom script
+          npm run build  # Ensure this matches the script name in your package.json
 
-      # Step 3: Set up PHP
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           tools: composer
 
-      # Step 4: Install PHP dependencies
       - name: Install PHP dependencies
-        run: |
-          composer install --no-dev --optimize-autoloader
-          composer dump-autoload
+        run: composer install --no-dev --optimize-autoloader
 
-      # Step 5: Debug FTP connection (check if FTP credentials are correct)
-      - name: Debug FTP connection
-        run: |
-          echo "FTP server: ${{ secrets.FTP_SERVER }}"
-          echo "FTP username: ${{ secrets.FTP_USERNAME }}"
-
-      # Step 6: Deploy files to FTP server
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs/  # Verify this is the correct directory on your server
-          local-dir: ./  # The root of your repository
+          server-dir: /htdocs/         
+          local-dir: ./               
 
-      # Step 7: Optional: Run migrations via webhook if needed
+      # Uncomment and modify this if you want to run migrations via webhook
       # - name: Run migrations via webhook
       #   env:
       #     MIGRATION_KEY: ${{ secrets.MIGRATION_KEY }}
       #   run: |
       #     curl -X GET "https://yourdomain.infinityfreeapp.com/run-migrations?key=${MIGRATION_KEY}"
-
-      # Optional: Clear Laravel cache after deployment
-      - name: Clear Cache
-        run: |
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
