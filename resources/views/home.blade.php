@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eFoodFinder</title>
-    <!-- Use your locally compiled Tailwind CSS -->
+    <title>E-foodFinder</title>
+    <!-- Link to your locally compiled Tailwind CSS -->
     <link href="{{ Vite::asset('resources/css/app.css') }}" rel="stylesheet">
-    </head>
-<body class="bg-gray-100">
+    <!-- Font Awesome for Hamburger Icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 font-sans">
 
     <!-- Navbar -->
-    <nav class="bg-blue-600 p-4">
+    <nav class="bg-blue-600 p-4 shadow-md fixed w-full z-50 top-0 left-0">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-white text-2xl">eFoodFinder</a>
-            <div class="flex space-x-4">
-                <a href="/login" class="text-white">Login</a>
-                <a href="/register" class="text-white">Register</a>
+            <a href="/" class="text-white text-3xl font-bold hover:text-yellow-400 transition-all">E-foodFinder</a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="/login" class="text-white text-lg hover:text-yellow-400 transition-all">Login</a>
+                <a href="/register" class="text-white text-lg hover:text-yellow-400 transition-all">Register</a>
+            </div>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-white text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i> <!-- Font Awesome Bars Icon for Hamburger -->
+                </button>
             </div>
         </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-blue-700 text-white mt-4 px-4 py-4 rounded-lg">
+            <a href="/login" class="block py-2 px-4 text-lg hover:bg-blue-600 rounded-lg">Login</a>
+            <a href="/register" class="block py-2 px-4 text-lg hover:bg-blue-600 rounded-lg">Register</a>
+        </div>
     </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-blue-100 text-center py-16 mt-8">
+        <h1 class="text-4xl font-extrabold text-gray-800 mb-4">Find Your Favorite Food Easily</h1>
+        <p class="text-lg text-gray-600">Search for dishes, restaurants, or cuisines from your favorite places</p>
+    </div>
 
     <!-- Search Bar -->
     <div class="container mx-auto mt-8">
@@ -52,12 +77,12 @@
 
     <script>
         // Handle search button click
-        document.getElementById('search-btn').addEventListener('click', function() {
+        document.getElementById('search-btn').addEventListener('click', function () {
             searchFood();
         });
 
         // Handle Enter key press for search input
-        document.getElementById('search-input').addEventListener('keyup', function(event) {
+        document.getElementById('search-input').addEventListener('keyup', function (event) {
             if (event.key === 'Enter') {
                 searchFood();
             }
@@ -113,7 +138,16 @@
                 resultsDiv.innerHTML += restaurantCard;
             });
         }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
 
 </body>
+
 </html>
