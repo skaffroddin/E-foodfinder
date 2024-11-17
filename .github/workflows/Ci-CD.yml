@@ -3,42 +3,46 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # This triggers the workflow when code is pushed to the 'main' branch
+      - main  # Trigger the workflow when code is pushed to the 'main' branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Runs on the latest Ubuntu image
 
     steps:
+      # Checkout code from the repository
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          fetch-depth: 2  # Fetches the last two commits for better performance
 
+      # Install Node.js dependencies and build assets (for front-end)
       - name: Install Node.js dependencies and build assets
         run: |
-          npm install
-          npm run build
+          npm install  # Install front-end dependencies
+          npm run build  # Build front-end assets (ensure build command is in package.json)
 
+      # Set up PHP and install dependencies
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          tools: composer
+          tools: composer  # Install composer
 
+      # Install PHP dependencies (production-only)
       - name: Install PHP dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      
+      # Deploy the project to the FTP server
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs/
-          local-dir: ./
+          server-dir: /htdocs/  # Ensure this is the correct directory on your server
+          local-dir: ./  # The local directory containing the files to deploy
 
+      # Run Laravel migrations
       - name: Run migrations
-        run: php artisan migrate --force
-
+        run: php artisan migrate --force  # Force migrations to run in production
