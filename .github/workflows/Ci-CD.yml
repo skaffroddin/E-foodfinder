@@ -16,11 +16,7 @@ jobs:
         with:
           fetch-depth: 2  # Fetches the last two commits for better performance
 
-      # Install Node.js dependencies and build assets (for front-end)
-      - name: Install Node.js dependencies and build assets
-        run: |
-          npm install  # Install front-end dependencies
-          npm run build  # Build front-end assets (ensure build command is in package.json)
+      
 
       # Set up PHP and install dependencies
       - name: Set up PHP
@@ -33,6 +29,14 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --no-dev --optimize-autoloader
 
+        
+      # Install Node.js dependencies and build assets (for front-end)
+      - name: Install Node.js dependencies and build assets
+        run: |
+          npm install  # Install front-end dependencies
+          npm run build  # Build front-end assets (ensure build command is in package.json)
+
+          
       # Deploy the project to the FTP server
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -44,5 +48,5 @@ jobs:
           local-dir: ./  # The local directory containing the files to deploy
 
       # Run Laravel migrations
-      - name: Run migrations
-        run: php artisan migrate --force  # Force migrations to run in production
+      # - name: Run migrations
+      #   run: php artisan migrate --force  # Force migrations to run in production
