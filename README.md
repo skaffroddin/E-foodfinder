@@ -1,66 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍴 E-foodfinder  
+![GitHub License](https://img.shields.io/badge/license-MIT-brightgreen)  
+![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue)  
+![Laravel](https://img.shields.io/badge/Laravel-v8.0-red)  
+![MySQL](https://img.shields.io/badge/MySQL-v5.7%2B-orange)  
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📚 Table of Contents  
+- [Project Overview](#project-overview)  
+- [Objectives](#objectives)  
+- [Target Audience](#target-audience)  
+- [Key Features](#key-features)  
+- [Technology Stack](#technology-stack)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Contributing](#contributing)  
+- [License](#license)  
+- [Acknowledgments](#acknowledgments)  
+- [Credits](#credits)  
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project Overview  
+**E-foodfinder** is an online platform that enables users to search for food from various restaurants and allows them to filter results based on preferences like price, rating, and more. It offers both a user management system for individuals looking to discover food and an admin panel for managing users, restaurants, and other platform features. The platform is designed to provide an intuitive and efficient way to find food based on specific filters, providing a seamless experience to both users and administrators.  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Objectives  
+The primary objective of **E-foodfinder** is to create an easy-to-use platform where users can search for food items from various restaurants, apply filters to sort by price, rating, and other criteria, and find the best food options available. The admin panel empowers platform administrators to manage users, restaurants, and other critical system settings effectively.  
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Target Audience  
+- **Food Enthusiasts**: Individuals who want to discover food options from various restaurants, customize their search, and choose meals that meet their preferences.  
+- **Restaurant Owners**: Restaurants wishing to showcase their menu items to a wider audience and connect with customers in a user-friendly platform.  
+- **Platform Administrators**: Users responsible for managing the overall platform, overseeing user registrations, restaurant listings, and ensuring smooth functionality.  
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Key Features  
+- 🔍 **Food Search & Filters**:  
+  - Users can search for food items and apply filters based on criteria like price, rating, and cuisine to find the best options.  
+- 👤 **User Management System**:  
+  - Users can register, login, and manage their profile. Admins can monitor and manage user activity and account status.  
+- 🛠️ **Admin Panel**:  
+  - Admins can manage users, restaurants, food listings, and filter configurations.  
+  - Admins have the ability to approve or reject restaurant submissions.  
+  - Admin panel dashboard to oversee platform statistics, including user and restaurant activity.  
+- ⭐ **Rating & Reviews**:  
+  - Users can rate and leave reviews for food items, helping others make informed decisions.  
+- 🍽️ **Restaurant Listings**:  
+  - Restaurants can list their menu items and provide detailed information, including images, descriptions, and prices.  
+- 🔒 **Authentication & Security**:  
+  - Secure user authentication with password encryption and login systems.  
+- 📨 **Email Notifications**:  
+  - Automated email notifications for user registration, food order status, and system updates.  
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Technology Stack  
+| **Category**      | **Technology**                        |  
+|-------------------|--------------------------------------|  
+| **Backend**       | Laravel (PHP Framework)              |  
+| **Frontend**      | Tailwind CSS, jQuery, JavaScript      |  
+| **Database**      | MySQL                                |  
+| **Authentication**| Laravel Auth                         |  
+| **Deployment**    | InfinityFree (for hosting)           |  
+| **CI/CD**         | Automated via GitHub Actions         |  
+| **Live Link**     | [efood-finder.rf.gd](https://efood-finder.rf.gd/) |  
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Installation  
 
-## Contributing
+### Prerequisites  
+- PHP 7.4 or higher  
+- Composer (for managing PHP dependencies)  
+- MySQL (for the database)  
+- Laravel (you'll need to install Laravel if it's not already installed)  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Laravel Installation Steps  
+1. **Install Laravel** (if you haven't already):  
+   ```bash  
+   composer global require laravel/installer  
