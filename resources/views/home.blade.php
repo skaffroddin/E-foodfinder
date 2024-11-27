@@ -154,52 +154,81 @@
             </button>
         </div>
 
-        <script>
-            // Handle search button click
-            document.getElementById('search-btn').addEventListener('click', function() {
+        <div class="grid grid-cols-3 gap-10">
+            @foreach ($infos as $info)
+            <div
+                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{asset('images/' .$info->image)}}" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$info->dish}}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$info->price}}</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Restaurant :{{$info->res_name}}</p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Location :{{$info->location}}</p>
+                    <a href="#"
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Order Now
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </main>
+
+    <script>
+        // Handle search button click
+        document.getElementById('search-btn').addEventListener('click', function() {
+            searchFood();
+        });
+
+        // Handle Enter key press for search input
+        document.getElementById('search-input').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
                 searchFood();
-            });
+            }
+        });
 
-            // Handle Enter key press for search input
-            document.getElementById('search-input').addEventListener('keyup', function(event) {
-                if (event.key === 'Enter') {
-                    searchFood();
-                }
-            });
+        function searchFood() {
+            const query = document.getElementById('search-input').value;
+            const priceFilter = document.getElementById('filter-price').value;
+            const cuisineFilter = document.getElementById('filter-cuisine').value;
 
-            function searchFood() {
-                const query = document.getElementById('search-input').value;
-                const priceFilter = document.getElementById('filter-price').value;
-                const cuisineFilter = document.getElementById('filter-cuisine').value;
+            // Create the query parameters
+            const params = new URLSearchParams();
+            params.append('query', query);
+            params.append('price_filter', priceFilter);
+            params.append('cuisine_filter', cuisineFilter);
 
-                // Create the query parameters
-                const params = new URLSearchParams();
-                params.append('query', query);
-                params.append('price_filter', priceFilter);
-                params.append('cuisine_filter', cuisineFilter);
+            // Perform the fetch request (AJAX)
+            fetch('/search?' + params.toString())
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-                // Perform the fetch request (AJAX)
-                fetch('/search?' + params.toString())
-                    .then(response => response.json())
-                    .then(data => {
-                        displayResults(data);
-                    })
-                    .catch(error => console.error('Error:', error));
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            // Check if there are results
+            if (data.length === 0) {
+                resultsDiv.innerHTML = '<p class="col-span-3 text-center text-gray-500">No results found.</p>';
+                return;
             }
 
-            function displayResults(data) {
-                const resultsDiv = document.getElementById('results');
-                resultsDiv.innerHTML = ''; // Clear previous results
-
-                // Check if there are results
-                if (data.length === 0) {
-                    resultsDiv.innerHTML = '<p class="col-span-3 text-center text-gray-500">No results found.</p>';
-                    return;
-                }
-
-                // Loop through each result and create a card
-                data.forEach(item => {
-                    const restaurantCard = `
+            // Loop through each result and create a card
+            data.forEach(item => {
+                const restaurantCard = `
                     <div class="bg-white p-4 rounded-lg shadow-md">
                         <img src="${item.restaurant_image}" alt="Restaurant Image" class="w-full h-40 object-cover rounded-lg">
                         <h3 class="mt-4 text-lg font-semibold">${item.restaurant_name}</h3>
@@ -214,18 +243,18 @@
                         </div>
                     </div>
                 `;
-                    resultsDiv.innerHTML += restaurantCard;
-                });
-            }
-
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+                resultsDiv.innerHTML += restaurantCard;
             });
-        </script>
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 
